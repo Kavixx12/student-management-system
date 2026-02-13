@@ -10,6 +10,18 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+    @Override
+    public Student updateStudent(Student student, long id) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        existingStudent.setFirstName(student.getFirstName());
+        existingStudent.setLastName(student.getLastName());
+        existingStudent.setEmail(student.getEmail());
+
+        return studentRepository.save(existingStudent);
+    }
+
     @Autowired
     private StudentRepository studentRepository;
 

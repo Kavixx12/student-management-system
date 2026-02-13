@@ -3,6 +3,7 @@ package com.kaveesha.student_management.controller;
 import com.kaveesha.student_management.entity.Student;
 import com.kaveesha.student_management.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,5 +23,10 @@ public class StudentController {
     @GetMapping
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody Student student){
+        return ResponseEntity.ok(studentService.updateStudent(student, id));
     }
 }

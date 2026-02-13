@@ -29,4 +29,10 @@ public class StudentController {
     public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody Student student){
         return ResponseEntity.ok(studentService.updateStudent(student, id));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable("id") long id){
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully!");
+    }
 }

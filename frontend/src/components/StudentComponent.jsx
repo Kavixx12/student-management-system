@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { createStudent } from '../services/StudentService'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { createStudent, getStudent, updateStudent } from '../services/StudentService'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const StudentComponent = () => {
 
@@ -8,18 +8,50 @@ const StudentComponent = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
 
+    const {id} = useParams();
     const navigator = useNavigate();
 
-    function saveStudent(e){
+    useEffect(() => {
+        if(id){
+            getStudent(id).then((response) => {
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+            }).catch(error => {
+                console.error(error);
+            })
+        }
+    }, [id])
+
+    function saveOrUpdateStudent(e){
         e.preventDefault();
 
         const student = {firstName, lastName, email}
-        console.log(student)
+        console.log(student);
 
-        createStudent(student).then((response) => {
-            console.log(response.data);
-            navigator('/students')
-        })
+        if(id){
+            updateStudent(id, student).then((response) => {
+                console.log(response.data);
+                navigator('/students');
+            }).catch(error => {
+                console.error(error);
+            })
+        }else{
+            createStudent(student).then((response) => {
+                console.log(response.data);
+                navigator('/students')
+            }).catch(error => {
+                console.error(error);
+            })
+        }
+    }
+
+    function pageTitle(){
+        if(id){
+            return <h2 className='text-center'>Update Student</h2>
+        }else{
+            return <h2 className='text-center'>Add Student</h2>
+        }
     }
 
     return (
@@ -27,7 +59,9 @@ const StudentComponent = () => {
             <br /> <br />
             <div className='row'>
                 <div className='card col-md-6 offset-md-3 offset-md-3'>
-                    <h2 className='text-center'>Add Student</h2>
+                    {
+                        pageTitle()
+                    }
                     <div className='card-body'>
                         <form>
                             <div className='form-group mb-2'>
@@ -69,7 +103,7 @@ const StudentComponent = () => {
                                 </input>
                             </div>
 
-                            <button className='btn btn-success' onClick={saveStudent}>Submit</button>
+                            <button className='btn btn-success' onClick={saveOrUpdateStudent}>Submit</button>
                         </form>
                     </div>
                 </div>

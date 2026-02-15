@@ -1,0 +1,172 @@
+import React, { useState } from 'react';
+import './AuthPage.css';
+
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    rememberMe: false
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      console.log('Login submitted:', { email: formData.email, password: formData.password });
+    } else {
+      console.log('Register submitted:', formData);
+    }
+  };
+
+  const toggleAuthMode = () => {
+    setIsLogin(!isLogin);
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      rememberMe: false
+    });
+    setShowPassword(false);
+    setShowConfirmPassword(false);
+  };
+
+  return (
+    <div className="auth-container">
+      {/* Left Section - Form */}
+      <div className="auth-form-section">
+        <div className="form-wrapper">
+          
+          {/* Header Section with LOGIN / REGISTER Text */}
+          <div className="auth-header" style={{ marginBottom: '2rem' }}>
+            {/* ⚠️ inline styles removed. Now controlled by .system-title in CSS */}
+            <h2 className="system-title">
+                {isLogin ? 'Login' : 'Register'}
+            </h2>
+          </div>
+
+          {/* Form Section */}
+          <form onSubmit={handleSubmit} className="auth-form">
+            
+            {!isLogin && (
+              <div className="row g-3 mb-3">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" className="form-control modern-input" placeholder="Enter first name" value={formData.firstName} onChange={handleInputChange} required={!isLogin} />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" className="form-control modern-input" placeholder="Enter last name" value={formData.lastName} onChange={handleInputChange} required={!isLogin} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="form-group mb-3">
+              <label htmlFor="email">Email Address</label>
+              <input type="email" id="email" name="email" className="form-control modern-input" placeholder="Enter your email" value={formData.email} onChange={handleInputChange} required />
+            </div>
+
+            <div className="form-group mb-3">
+              <label htmlFor="password">Password</label>
+              <div className="password-input-wrapper">
+                <input type={showPassword ? 'text' : 'password'} id="password" name="password" className="form-control modern-input" placeholder="Enter your password" value={formData.password} onChange={handleInputChange} required />
+                <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)} aria-label="Toggle password visibility">
+                  {showPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {!isLogin && (
+              <div className="form-group mb-3">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <div className="password-input-wrapper">
+                  <input type={showConfirmPassword ? 'text' : 'password'} id="confirmPassword" name="confirmPassword" className="form-control modern-input" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleInputChange} required={!isLogin} />
+                  <button type="button" className="password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)} aria-label="Toggle confirm password visibility">
+                    {showConfirmPassword ? (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>) : (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>)}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {isLogin && (
+              <div className="form-options mb-4">
+                <div className="form-check">
+                  <input type="checkbox" className="form-check-input" id="rememberMe" name="rememberMe" checked={formData.rememberMe} onChange={handleInputChange} />
+                  <label className="form-check-label" htmlFor="rememberMe">Remember me</label>
+                </div>
+                <a href="#" className="forgot-password">Forgot password?</a>
+              </div>
+            )}
+
+            <button type="submit" className="btn btn-primary auth-submit-btn w-100 mb-3">
+              {isLogin ? 'LOGIN' : 'REGISTER'}
+            </button>
+
+            <div className="auth-toggle text-center">
+              <p className="mb-0">
+                {isLogin ? "Don't have an account? " : "Already have an account? "}
+                <button type="button" className="btn-link" onClick={toggleAuthMode}>
+                  {isLogin ? 'Register here' : 'Login here'}
+                </button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* ======================================================= */}
+      {/* RIGHT SECTION - YOUR CUSTOM LOGO HERE */}
+      {/* ======================================================= */}
+      <div className="auth-image-section">
+        <div className="triangular-accent"></div>
+        <div className="image-overlay">
+            <div className="brand-section">
+                
+                {/* Animation Wrapper: 
+                   Due to the 'brand-icon' class, anything inside this will float up and down.
+                */}
+                <div className="brand-section" style={{ marginLeft: '100px' , marginTop: '50px' }}>
+                <div className="brand-icon">
+                    {/* ⚠️ IMPORTANT: 
+                        Put your Logo name in 'src'.
+                        example: src="/mylogo.png" 
+                        (You can change the width as needed)
+                    */}
+                    <img 
+                        src="/logo.png" 
+                        alt="School Logo" 
+                        style={{ width: '350px', height: 'auto' }} 
+                    />
+                </div>
+                </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AuthPage;

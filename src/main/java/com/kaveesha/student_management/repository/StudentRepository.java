@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    // දැනට මෙතන මුකුත් ලියන්න ඕන නැහැ.
-    // CRUD වැඩ ටික (Save, Delete, Find) Spring Boot අපිට නිකම්ම දෙනවා.
+
 }

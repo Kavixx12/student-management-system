@@ -50,7 +50,7 @@ const AuthPage = () => {
       
       <div className="auth-form-section">
 
-        {/* 1️⃣ මුලින්ම Form එක දානවා (එතකොට මේක වම් පැත්තට එනවා) */}
+
         <div className="form-wrapper">
           
           <div className="auth-header">
@@ -134,7 +134,7 @@ const AuthPage = () => {
           </form>
         </div>
         
-        {/* 2️⃣ Logo එක දෙවෙනියට දානවා (එතකොට මේක දකුණු පැත්තට යනවා) */}
+
         <div className="brand-container">
             <div className="brand-icon">
                 <img 

@@ -1,6 +1,5 @@
 /* ============================================
    1. IMPORT CUSTOM FONT
-   (Make sure 'Rekind.ttf' is inside 'public/fonts/' folder)
    ============================================ */
 @font-face {
   font-family: 'Rekind';
@@ -10,465 +9,215 @@
 }
 
 /* ============================================
-   AUTH CONTAINER - Split Screen Layout
+   AUTH CONTAINER - LOCKED FULL SCREEN
    ============================================ */
 .auth-container {
   display: flex;
-  min-height: 100vh;
-  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
-}
+  overflow: hidden;
 
-/* ============================================
-   LEFT SECTION - Form Section
-   ============================================ */
-.auth-form-section {
-  flex: 0 0 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  padding: 2rem;
-  position: relative;
-  z-index: 3;
-}
-
-.form-wrapper {
-  width: 100%;
-  max-width: 480px;
-  animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================
-   HEADER SECTION
-   ============================================ */
-.auth-header {
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-/* ⚠️ TITLE STYLING UPDATED HERE */
-.system-title {
-  /* Custom Font Applied */
-  font-family: 'Rekind', sans-serif;
-  
-  font-size: 4.5rem; /* Increased font size */
-  font-weight: 800;
-  color: #f59e0b; /* Orange Color - Change this if needed 👇 */
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-.welcome-text {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-
-/* ============================================
-   FORM STYLING
-   ============================================ */
-.auth-form {
-  animation: fadeIn 0.4s ease-out 0.2s both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #495057;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.3px;
-}
-
-/* ============================================
-   MODERN INPUT FIELDS
-   ============================================ */
-.modern-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  border: none;
-  border-bottom: 2px solid #e0e0e0;
-  border-radius: 0;
-  background: transparent;
-  transition: all 0.3s ease;
-  outline: none;
-}
-
-.modern-input:focus {
-  border-bottom-color: #f59e0b;
-  background: rgba(245, 158, 11, 0.02);
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
-}
-
-.modern-input::placeholder {
-  color: #adb5bd;
-  font-size: 0.9rem;
-}
-
-/* ============================================
-   PASSWORD INPUT WITH TOGGLE
-   ============================================ */
-.password-input-wrapper {
-  position: relative;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #6c757d;
-  cursor: pointer;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-}
-
-.password-toggle:hover {
-  color: #f59e0b;
-}
-
-.password-toggle:focus {
-  outline: none;
-}
-
-/* ============================================
-   FORM OPTIONS (Remember Me & Forgot Password)
-   ============================================ */
-.form-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.form-check {
-  display: flex;
-  align-items: center;
-}
-
-.form-check-input {
-  width: 18px;
-  height: 18px;
-  margin-right: 0.5rem;
-  cursor: pointer;
-  border: 2px solid #d0d0d0;
-  border-radius: 3px;
-}
-
-.form-check-input:checked {
-  background-color: #f59e0b;
-  border-color: #f59e0b;
-}
-
-.form-check-label {
-  font-size: 0.875rem;
-  color: #495057;
-  cursor: pointer;
-  margin-bottom: 0;
-}
-
-.forgot-password {
-  font-size: 0.875rem;
-  color: #f59e0b;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.forgot-password:hover {
-  color: #d97706;
-  text-decoration: underline;
-}
-
-/* ============================================
-   SUBMIT BUTTON - Gradient Design
-   ============================================ */
-.auth-submit-btn {
-  padding: 0.875rem 2rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.auth-submit-btn:hover {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-  transform: translateY(-2px);
-}
-
-.auth-submit-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
-}
-
-/* ============================================
-   AUTH TOGGLE (Switch between Login/Register)
-   ============================================ */
-.auth-toggle {
-  padding-top: 1rem;
-  border-top: 1px solid #e9ecef;
-}
-
-.auth-toggle p {
-  font-size: 0.9rem;
-  color: #6c757d;
-}
-
-.auth-toggle .btn-link {
-  background: none;
-  border: none;
-  color: #f59e0b;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.auth-toggle .btn-link:hover {
-  color: #d97706;
-  text-decoration: underline;
-}
-
-/* ============================================
-   RIGHT SECTION - Image with TRIANGULAR EDGE
-   ============================================ */
-.auth-image-section {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  z-index: 2;
-  /* TRIANGULAR CUT - Sharp point from top-left */
-  clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.auth-image-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  
-  /* Background Image Path */
-  background-image: url('/background.png'); 
+  /* BACKGROUND IMAGE */
+  background-image: url('/backg.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.6;
-  z-index: 1;
-  filter: blur(2px);
+  background-repeat: no-repeat;
 }
 
-/* ============================================
-   TRIANGULAR OVERLAY ACCENT
-   ============================================ */
-.triangular-accent {
+/* Dark Overlay (පිටිපස්සේ පින්තූරේ ටිකක් අඳුරු කරනවා ෆෝම් එක කැපිලා පේන්න) */
+.auth-container::before {
+  content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 150px 150px 0 0;
-  border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
-  z-index: 3;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
 }
 
 /* ============================================
-   IMAGE OVERLAY & BRAND SECTION
+   CENTERED CONTENT AREA
    ============================================ */
-.image-overlay {
+.auth-form-section {
   position: relative;
-  height: 100%;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  padding: 2rem;
-}
-
-.brand-section {
-  text-align: center;
-  color: white;
-  animation: fadeInRight 0.8s ease-out;
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.brand-icon {
-  margin-bottom: 1.5rem;
-  /* Animation Float (Up and Down movement) */
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px); /* Increased animation movement slightly */
-  }
+  padding: 1rem;
+  gap: 25rem; /* Form එකයි Logo එකයි අතර පරතරය */
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   🔥 GLASSMORPHISM FORM WRAPPER 🔥
    ============================================ */
-
-/* Tablet devices */
-@media (max-width: 992px) {
-  .auth-image-section {
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  .brand-name {
-    font-size: 2.5rem;
-  }
-
-  .brand-tagline {
-    font-size: 1rem;
-  }
-}
-
-/* Mobile devices */
-@media (max-width: 768px) {
-  .auth-container {
-    flex-direction: column;
-  }
-
-  .auth-form-section {
-    flex: 1;
-    min-height: 100vh;
-    padding: 1.5rem;
-  }
-
-  .form-wrapper {
-    max-width: 100%;
-  }
-
-  .auth-image-section {
-    display: none;
-  }
-
-  .system-title {
-    font-size: 2.5rem; /* Reduced size to prevent being too large on mobile */
-  }
-
-  .welcome-text {
-    font-size: 0.9rem;
-  }
-
-  .form-options {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .forgot-password {
-    margin-left: 0;
-  }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-  .auth-form-section {
-    padding: 1rem;
-  }
-
-  .auth-header {
-    margin-bottom: 2rem;
-  }
-
-  .system-title {
-    font-size: 1.25rem;
-  }
-
-  .modern-input {
-    padding: 0.65rem 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  .auth-submit-btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-  }
-}
-
-/* Utility classes */
-.w-100 {
+.form-wrapper {
   width: 100%;
+  max-width: 420px;
+  
+  /* 👇 වීදුරු ආචරණය (Glass Effect) මෙතනයි තියෙන්නේ */
+  background: rgba(0, 0, 0, 0.6); /* කළු පාට 60% ක් විනිවිද පේනවා */
+  backdrop-filter: blur(15px); /* පිටිපස්ස Blur කරනවා */
+  -webkit-backdrop-filter: blur(15px); /* Safari support */
+  
+  /* වටේට පොඩි සුදු ඉරක් (Border) */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5); /* සෙවනැල්ල ටිකක් වැඩි කළා */
+  
+  animation: fadeInUp 0.6s ease-out;
+  
+  /* Scroll Control */
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
-.mb-0 {
-  margin-bottom: 0;
+.form-wrapper::-webkit-scrollbar { display: none; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.mb-3 {
-  margin-bottom: 1rem;
-}
-
-.mb-4 {
+/* ============================================
+   HEADER & TITLES
+   ============================================ */
+.auth-header {
   margin-bottom: 1.5rem;
-}
-
-.text-center {
   text-align: center;
 }
 
-* {
-  box-sizing: border-box;
+.system-title {
+  font-family: 'Rekind', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #f59e0b; /* Orange Title */
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+  
+  /* Title එකට පොඩි Shadow එකක් */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
+
+/* ============================================
+   FORM ELEMENTS (TEXT COLORS UPDATED TO WHITE)
+   ============================================ */
+.auth-form { animation: fadeIn 0.4s ease-out 0.2s both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.form-group { margin-bottom: 0.8rem; }
+
+/* 👇 Labels සුදු පාට කළා */
+.form-group label { 
+  display: block; 
+  font-size: 0.85rem; 
+  font-weight: 500; 
+  color: #e0e0e0; /* ලා අළු පාටක් */
+  margin-bottom: 0.3rem; 
+  letter-spacing: 0.5px;
+}
+
+/* 👇 Input Fields සුදු සහ Translucent කළා */
+.modern-input { 
+  width: 100%; 
+  padding: 0.6rem 0.5rem; 
+  font-size: 0.95rem; 
+  border: none; 
+  
+  /* යට ඉර සුදු පාට (ටිකක් අඩු කරලා) */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3); 
+  
+  border-radius: 0; 
+  background: transparent; 
+  color: #ffffff; /* Type කරන අකුරු සුදු පාටයි */
+  transition: all 0.3s ease; 
+  outline: none; 
+}
+
+.modern-input:focus { 
+  border-bottom-color: #f59e0b; /* Click කළාම Orange වෙනවා */
+  background: rgba(255, 255, 255, 0.05); 
+}
+
+.modern-input::placeholder { 
+  color: #aaaaaa; /* Placeholder එක අළු පාටයි */
+  font-size: 0.85rem; 
+}
+
+.password-input-wrapper { position: relative; }
+.password-toggle { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #aaaaaa; cursor: pointer; padding: 0.5rem; }
+.password-toggle:hover { color: #f59e0b; }
+
+.form-options { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 1rem; 
+  margin-bottom: 1.5rem; 
+}
+
+.form-check { display: flex; align-items: center; }
+.form-check-input { width: 16px; height: 16px; margin-right: 0.5rem; cursor: pointer; border: 1px solid #aaaaaa; background: transparent; border-radius: 3px; }
+.form-check-input:checked { background-color: #f59e0b; border-color: #f59e0b; }
+.form-check-label { font-size: 0.85rem; color: #e0e0e0; cursor: pointer; margin-bottom: 0; }
+
+.forgot-password { font-size: 0.85rem; color: #f59e0b; text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+.forgot-password:hover { color: #ffb74d; text-decoration: underline; }
+
+/* Button */
+.auth-submit-btn { 
+  padding: 0.75rem 2rem; 
+  font-size: 1rem; 
+  font-weight: 700; 
+  letter-spacing: 1px; 
+  text-transform: uppercase; 
+  border: none; 
+  border-radius: 8px; 
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); 
+  color: white; 
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); 
+  transition: all 0.3s ease; 
+  cursor: pointer; 
+}
+.auth-submit-btn:hover { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6); }
+
+/* Toggle Text */
+.auth-toggle { padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.auth-toggle p { font-size: 0.9rem; color: #cccccc; }
+.auth-toggle .btn-link { background: none; border: none; color: #f59e0b; font-weight: 600; cursor: pointer; padding: 0; text-decoration: none; transition: color 0.2s ease; }
+.auth-toggle .btn-link:hover { color: #ffb74d; text-decoration: underline; }
+
+/* ============================================
+   FLOATING LOGO STYLES
+   ============================================ */
+.brand-container { text-align: center; }
+.brand-icon { animation: float 3s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* ============================================
+   RESPONSIVE (Mobile)
+   ============================================ */
+@media (max-width: 1100px) { .auth-form-section { gap: 6rem; } }
+@media (max-width: 900px) {
+  .auth-container { height: auto; min-height: 100vh; overflow-y: auto; }
+  .auth-form-section { flex-direction: column-reverse; gap: 2rem; padding-top: 3rem; padding-bottom: 3rem; }
+}
+
+/* Utility */
+.w-100 { width: 100%; }
+.mb-0 { margin-bottom: 0; }
+.mb-3 { margin-bottom: 1rem; }
+.text-center { text-align: center; }
+* { box-sizing: border-box; }

@@ -47,19 +47,18 @@ const AuthPage = () => {
 
   return (
     <div className="auth-container">
-      {/* Left Section - Form */}
+      
       <div className="auth-form-section">
+
+        {/* 1️⃣ මුලින්ම Form එක දානවා (එතකොට මේක වම් පැත්තට එනවා) */}
         <div className="form-wrapper">
           
-          {/* Header Section with LOGIN / REGISTER Text */}
-          <div className="auth-header" style={{ marginBottom: '2rem' }}>
-            {/* ⚠️ inline styles removed. Now controlled by .system-title in CSS */}
+          <div className="auth-header">
             <h2 className="system-title">
                 {isLogin ? 'Login' : 'Register'}
             </h2>
           </div>
 
-          {/* Form Section */}
           <form onSubmit={handleSubmit} className="auth-form">
             
             {!isLogin && (
@@ -134,37 +133,20 @@ const AuthPage = () => {
             </div>
           </form>
         </div>
-      </div>
-
-      {/* ======================================================= */}
-      {/* RIGHT SECTION - YOUR CUSTOM LOGO HERE */}
-      {/* ======================================================= */}
-      <div className="auth-image-section">
-        <div className="triangular-accent"></div>
-        <div className="image-overlay">
-            <div className="brand-section">
-                
-                {/* Animation Wrapper: 
-                   Due to the 'brand-icon' class, anything inside this will float up and down.
-                */}
-                <div className="brand-section" style={{ marginLeft: '100px' , marginTop: '50px' }}>
-                <div className="brand-icon">
-                    {/* ⚠️ IMPORTANT: 
-                        Put your Logo name in 'src'.
-                        example: src="/mylogo.png" 
-                        (You can change the width as needed)
-                    */}
-                    <img 
-                        src="/logo.png" 
-                        alt="School Logo" 
-                        style={{ width: '350px', height: 'auto' }} 
-                    />
-                </div>
-                </div>
-
+        
+        {/* 2️⃣ Logo එක දෙවෙනියට දානවා (එතකොට මේක දකුණු පැත්තට යනවා) */}
+        <div className="brand-container">
+            <div className="brand-icon">
+                <img 
+                    src="/logo.png" 
+                    alt="School Logo" 
+                    style={{ width: '350px', height: 'auto' }} 
+                />
             </div>
         </div>
+
       </div>
+      
     </div>
   );
 };

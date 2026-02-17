@@ -36,25 +36,25 @@ public class SpringSecurityConfig {
 
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> {
-                    // 1. මේ URLs වලට කාට වුනත් එන්න පුළුවන් (Login & Register)
+
                     authorize.requestMatchers("/api/auth/**").permitAll();
 
-                    // 2. Options Method එකට ඉඩ දෙන්න (React Pre-flight requests වලට)
+
                     authorize.requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll();
 
-                    // 3. අනිත් හැම URL එකකටම අනිවාර්යයෙන්ම Log වෙලා ඉන්න ඕන
+
                     authorize.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
 
-        // Exception Handling (වැරදි ටෝකන් එකක් ආවොත් මොකද කරන්නේ)
+
         http.exceptionHandling( exception -> exception
                 .authenticationEntryPoint(authenticationEntryPoint));
 
-        // Session Management (අපි Stateless විදිහට වැඩ කරන්නේ, Session තියාගන්නේ නෑ)
+
         http.sessionManagement( session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // අපේ Filter එක දානවා
+
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

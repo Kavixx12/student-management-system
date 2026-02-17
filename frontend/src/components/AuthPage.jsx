@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './AuthPage.css';
+// 🔥 IMPORT: Services to communicate with Backend
+import { loginAPICall, registerAPICall, storeToken } from '../services/AuthService';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,12 +25,65 @@ const AuthPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  // 🔥 UPDATED: Handle Form Submission (Connects to Backend)
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (isLogin) {
-      console.log('Login submitted:', { email: formData.email, password: formData.password });
+      // ==========================
+      //      LOGIN LOGIC
+      // ==========================
+      try {
+        // 1. Call the Login API
+        const response = await loginAPICall(formData.email, formData.password);
+        
+        // 2. Extract Token (Prefix with 'Bearer ')
+        const token = 'Bearer ' + response.data;
+        
+        // 3. Store Token in LocalStorage
+        storeToken(token);
+
+        alert("Login Successful! 🔥");
+        console.log("Token received:", token);
+
+        // TODO: Redirect to Dashboard here
+        // window.location.href = "/dashboard"; 
+
+      } catch (error) {
+        console.error(error);
+        alert("Login Failed! Please check your credentials.");
+      }
+
     } else {
-      console.log('Register submitted:', formData);
+      // ==========================
+      //     REGISTER LOGIC
+      // ==========================
+      try {
+        // 1. Combine First Name + Last Name
+        const fullName = formData.firstName + " " + formData.lastName;
+        
+        // 2. Prepare Data Object for Backend
+        // Note: Since we don't have a 'username' field in UI, we generate one or use email.
+        // Here, I am generating a username using firstName + random number for testing.
+        const registerObj = {
+            name: fullName,
+            username: formData.firstName.toLowerCase() + Math.floor(Math.random() * 1000), 
+            email: formData.email,
+            password: formData.password
+        };
+
+        // 3. Call the Register API
+        await registerAPICall(registerObj);
+        
+        alert("Registration Successful! Please Login.");
+        
+        // 4. Switch to Login View
+        setIsLogin(true);
+
+      } catch (error) {
+        console.error(error);
+        alert("Registration Failed! Username or Email might already exist.");
+      }
     }
   };
 

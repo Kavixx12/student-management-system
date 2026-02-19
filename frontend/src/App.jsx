@@ -1,35 +1,31 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ListStudentComponent from './components/ListStudentComponent'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import StudentComponent from './components/StudentComponent'
 import AuthPage from './components/AuthPage'
+// 🔥 IMPORT THE NEW DASHBOARD COMPONENT HERE
+import Dashboard from './components/Dashboard'
 
 function App() {
-
     return (
-        <>
-            <BrowserRouter>
+        <BrowserRouter>
+            <Routes>
+                {/* 1. Default Route: Redirect users to the Login page when they visit localhost:3000 */}
+                <Route path='/' element={<Navigate to="/login" />} />
+
+                {/* 2. Authentication Routes (Login & Register) */}
+                <Route path='/login' element={<AuthPage />} />
+                <Route path='/register' element={<AuthPage />} />
+
+                {/* 3. Main Dashboard Route */}
+                <Route path='/dashboard' element={<Dashboard />} />
+
+                {/* 4. Student Management Routes (Your existing CRUD operations) */}
+                <Route path='/students' element={<ListStudentComponent />} />
+                <Route path='/add-student' element={<StudentComponent />} />
+                <Route path='/edit-student/:id' element={<StudentComponent />} />
                 
-                <Routes>
-                    {/* http://localhost:3000 */}
-                    <Route path='/' element = { <ListStudentComponent /> }></Route>
-
-                    {/* http://localhost:3000/students */}
-                    <Route path='/students' element = { <ListStudentComponent /> }></Route>
-
-                    {/* http://localhost:3000/add-student */}
-                    <Route path='/add-student' element = { <StudentComponent /> }></Route>
-
-                    {/* http://localhost:3000/edit-student/1 */}
-                    <Route path='/edit-student/:id' element = { <StudentComponent /> }></Route>
-
-                    {/* Login & Register Pages */}
-                    <Route path='/login' element={<AuthPage />}></Route>
-                    <Route path='/register' element={<AuthPage />}></Route>
-                    
-                </Routes>
-                
-            </BrowserRouter>
-        </>
+            </Routes>
+        </BrowserRouter>
     )
 }
 

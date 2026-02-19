@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AuthPage.css';
 // 🔥 IMPORT: Services to communicate with Backend
 import { loginAPICall, registerAPICall, storeToken } from '../services/AuthService';
 
 const AuthPage = () => {
+  const navigator = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -43,11 +45,11 @@ const AuthPage = () => {
         // 3. Store Token in LocalStorage
         storeToken(token);
 
-        alert("Login Successful! 🔥");
+        alert("Login Successful!");
         console.log("Token received:", token);
 
-        // TODO: Redirect to Dashboard here
-        // window.location.href = "/dashboard"; 
+        
+        navigator('/dashboard');
 
       } catch (error) {
         console.error(error);

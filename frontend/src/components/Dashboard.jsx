@@ -113,7 +113,11 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <div className="brand-logo"><IcoZap /></div>
+        <img 
+          src="/onlylogo.png" 
+          alt="Logo" 
+          style={{ width: '45px', height: '45px', objectFit: 'contain', marginRight: '10px' }} 
+        />
         <div>
           <div className="brand-text-white">EDU</div>
           <div className="brand-text-orange">SPARK</div>
@@ -128,11 +132,7 @@ function Sidebar() {
         ))}
       </nav>
 
-      <div className="sidebar-upgrade">
-        <div style={{color:"white",fontWeight:700,fontSize:13,marginBottom:6}}>🚀 Upgrade to Plus</div>
-        <div style={{color:"#555",fontSize:11,marginBottom:10,lineHeight:1.5}}>Unlock AI tutoring, unlimited resources & priority support.</div>
-        <button className="upgrade-btn">Get Plus →</button>
-      </div>
+      
     </aside>
   );
 }
@@ -256,23 +256,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* ── Enquiry Row ── */}
-          <div>
-            <div className="widget-header">
-              <h2 className="widget-title">ENQUIRY</h2>
-              <button className="view-all-btn">VIEW ALL</button>
-            </div>
-            <div className="enquiry-grid">
-              {CARDS.map(card => (
-                <div key={card.label} className={`enquiry-card ${card.highlight ? 'highlight' : ''}`}>
-                  {card.highlight && <div className="enquiry-card-top-bar" />}
-                  <p className="enquiry-card-label">{card.label}</p>
-                  <p className="enquiry-card-value">{card.value}</p>
-                  <span style={{color:card.highlight?O:"#2a2a2a",display:"flex"}}><IcoTrend /></span>
-                </div>
-              ))}
-            </div>
-          </div>
+         
 
         </main>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthPage.css';
-// 🔥 IMPORT: Services to communicate with Backend
+// IMPORT: Services to communicate with Backend
 import { loginAPICall, registerAPICall, storeToken } from '../services/AuthService';
 
 const AuthPage = () => {
@@ -27,7 +27,7 @@ const AuthPage = () => {
     }));
   };
 
-  // 🔥 UPDATED: Handle Form Submission (Connects to Backend)
+  // UPDATED: Handle Form Submission (Connects to Backend)
   const handleSubmit = async (e) => {
     e.preventDefault();
 

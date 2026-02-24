@@ -98,18 +98,21 @@ function MiniCalendar() {
   );
 }
 
+
 // ── Sidebar ──
 const NAV = [
-  { Icon: IcoDashboard, label: "Dashboard", active: true },
-  { Icon: IcoEnquiry,   label: "Enquiry" },
-  { Icon: IcoAttendance,label: "Attendance" },
-  { Icon: IcoStudents,  label: "Students" },
-  { Icon: IcoBatch,     label: "Batch" },
-  { Icon: IcoUsers,     label: "Users" },
-  { Icon: IcoSettings,  label: "Settings" },
+  { Icon: IcoDashboard, label: "Dashboard", active: true, path: "/dashboard" },
+  { Icon: IcoEnquiry,   label: "Enquiry", path: "#" },
+  { Icon: IcoAttendance,label: "Attendance", path: "#" },
+  { Icon: IcoStudents,  label: "Students", path: "/students" }, // 🔥 මෙන්න මේකට /students කියලා path එක දුන්නා
+  { Icon: IcoBatch,     label: "Batch", path: "#" },
+  { Icon: IcoUsers,     label: "Users", path: "#" },
+  { Icon: IcoSettings,  label: "Settings", path: "#" },
 ];
 
 function Sidebar() {
+  const navigate = useNavigate(); // 🔥 Navigation Hook එක පාවිච්චි කරනවා
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -125,18 +128,25 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {NAV.map(({Icon,label,active}) => (
-          <button key={label} className={`nav-item ${active ? 'active' : ''}`}>
+        {NAV.map(({Icon, label, active, path}) => (
+          <button 
+            key={label} 
+            onClick={() => navigate(path)} /* 🔥 බට්න් එක එබුවම අදාල path එකට යනවා */
+            className={`nav-item ${active ? 'active' : ''}`}
+          >
             <Icon />{label}
           </button>
         ))}
       </nav>
 
-      
+      <div className="sidebar-upgrade">
+        <div style={{color:"white",fontWeight:700,fontSize:13,marginBottom:6}}>🚀 Upgrade to Plus</div>
+        <div style={{color:"#555",fontSize:11,marginBottom:10,lineHeight:1.5}}>Unlock AI tutoring, unlimited resources & priority support.</div>
+        <button className="upgrade-btn">Get Plus →</button>
+      </div>
     </aside>
   );
 }
-
 // ── Top Bar ──
 function TopBar({ onLogout }) {
   return (

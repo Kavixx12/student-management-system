@@ -1,0 +1,116 @@
+.student-page-wrapper {
+  min-height: 100vh;
+  background-color: #0D0D0D; /* Dark background */
+  padding: 40px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.student-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.student-page-title {
+  color: white;
+  font-weight: 800;
+  font-size: 28px;
+  margin: 0;
+}
+
+.btn-add-student {
+  background-color: #FF8C00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-add-student:hover {
+  background-color: #e67e00;
+  transform: translateY(-2px);
+}
+
+.table-container {
+  background-color: #111111;
+  border: 1px solid #1e1e1e;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #1a1a1a;
+  color: #FF8C00;
+  padding: 18px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.custom-table td {
+  padding: 18px 24px;
+  border-top: 1px solid #1e1e1e;
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.custom-table tr:hover {
+  background-color: rgba(255, 140, 0, 0.05);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-update {
+  background-color: #1e1e1e;
+  color: #4da6ff;
+  border: 1px solid #2a2a2a;
+}
+
+.btn-update:hover {
+  background-color: #2a2a2a;
+  color: #80c1ff;
+}
+
+.btn-delete {
+  background-color: #1e1e1e;
+  color: #ff4d4d;
+  border: 1px solid #2a2a2a;
+}
+
+.btn-delete:hover {
+  background-color: #331a1a;
+  color: #ff6666;
+  border-color: #ff4d4d;
+}

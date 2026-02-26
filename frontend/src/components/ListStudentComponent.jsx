@@ -86,7 +86,7 @@ const ListStudentComponent = () => {
                             )
                         }
                         
-                        {/* ඩේටා නැති වුනොත් පෙන්නන්න පොඩි ලස්සන මැසේජ් එකක් */}
+                        
                         {students.length === 0 && (
                             <tr>
                                 <td colSpan="5" style={{textAlign: 'center', padding: '40px', color: '#666'}}>

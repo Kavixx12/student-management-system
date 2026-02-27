@@ -10,6 +10,11 @@ const IcoRight = () => (<svg width="16" height="16" fill="none" stroke="currentC
 const IcoTrend = () => (<svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>);
 const IcoCal = () => (<svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>);
 
+// 🔥 NEW: Icons for the Top Stats Cards
+const IcoStudents2 = () => (<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
+const IcoBriefcase = () => (<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>);
+const IcoDollar = () => (<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>);
+
 // ── Donut Chart Component ──
 function DonutChart() {
   const r = 68, cx = 88, cy = 88, circ = 2 * Math.PI * r;
@@ -88,6 +93,7 @@ function MiniCalendar() {
 }
 
 // ── Enquiry Data Array ──
+// I noticed you removed the actual bottom JSX for this, but I'll leave the array here just in case.
 const CARDS = [
   { label:"TOTAL ENQUIRIES",    value:"13.4K", highlight:false },
   { label:"ENQUIRIES TODAY",    value:"500",   highlight:false },
@@ -96,17 +102,42 @@ const CARDS = [
   { label:"TOTAL REGISTRATIONS",value:"100K",  highlight:true  },
 ];
 
+// 🔥 NEW: Data for Top Stats Cards
+const TOP_STATS = [
+  { label: "Total Students", value: "1,250", subtext: "+15 This Month", Icon: IcoStudents2 },
+  { label: "Total Employees", value: "48", subtext: "+2 This Month", Icon: IcoBriefcase },
+  { label: "Revenue", value: "$42,500", subtext: "+12% This Month", Icon: IcoDollar },
+  { label: "Total Profit", value: "$18,200", subtext: "+8% This Month", Icon: IcoTrend }
+];
+
 // ── Main Dashboard Content ──
-// Note: Sidebar and TopBar are now handled by Layout.jsx
 export default function Dashboard() {
   const [tab, setTab] = useState(0);
   const tabs = ["BACHELORS IN SCIENCE (HONS)... (BHM)", "DIPLOMA IN CULINARY ARTS"];
 
   return (
     <main className="dashboard-content" style={{ padding: '28px 32px' }}>
-      <h1 className="dashboard-title">Dashboard</h1>
+      <h1 className="dashboard-title" style={{ marginBottom: '24px' }}>Dashboard</h1>
 
-      {/* ── Top Row (Attendance & Calendar) ── */}
+      {/* 🔥 NEW: Top Summary Stats Row inserted right below the title */}
+      <div className="top-stats-grid">
+        {TOP_STATS.map((stat, index) => (
+          <div key={index} className="top-stat-card">
+            <div className="stat-header">
+              <span className="stat-label">{stat.label.toUpperCase()}</span>
+              <div className="stat-icon-wrapper">
+                <stat.Icon />
+              </div>
+            </div>
+            <div className="stat-value">{stat.value}</div>
+            <div className="stat-subtext">
+              <strong>{stat.subtext.split(' ')[0]}</strong> {stat.subtext.split(' ').slice(1).join(' ')}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Middle Row (Attendance & Calendar) ── */}
       <div className="dashboard-grid">
 
         {/* Attendance Widget */}

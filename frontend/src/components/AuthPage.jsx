@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; 
 import './AuthPage.css';
-// IMPORT: Services to communicate with Backend
 import { loginAPICall, registerAPICall, storeToken } from '../services/AuthService';
 
 const AuthPage = () => {
@@ -27,14 +27,10 @@ const AuthPage = () => {
     }));
   };
 
-  // UPDATED: Handle Form Submission (Connects to Backend)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
-      // ==========================
-      //      LOGIN LOGIC
-      // ==========================
       try {
         // 1. Call the Login API
         const response = await loginAPICall(formData.email, formData.password);
@@ -45,28 +41,48 @@ const AuthPage = () => {
         // 3. Store Token in LocalStorage
         storeToken(token);
 
-        alert("Login Successful!");
+        //Replace alert with nice toast notification
+        toast.success("Login Successful! Welcome back.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        
         console.log("Token received:", token);
 
-        
-        navigator('/dashboard');
+        // Add a slight delay before navigating so user sees the success message
+        setTimeout(() => {
+          navigator('/dashboard');
+        }, 1500);
 
       } catch (error) {
         console.error(error);
-        alert("Login Failed! Please check your credentials.");
+        //Replace alert with error toast notification
+        toast.error("Login Failed! Please check your email and password.", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "dark",
+        });
       }
 
     } else {
-      // ==========================
-      //     REGISTER LOGIC
-      // ==========================
+      
+      // Basic validation: Check if passwords match
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("Passwords do not match!", { theme: "dark" });
+        return;
+      }
+
       try {
         // 1. Combine First Name + Last Name
         const fullName = formData.firstName + " " + formData.lastName;
         
         // 2. Prepare Data Object for Backend
-        // Note: Since we don't have a 'username' field in UI, we generate one or use email.
-        // Here, I am generating a username using firstName + random number for testing.
         const registerObj = {
             name: fullName,
             username: formData.firstName.toLowerCase() + Math.floor(Math.random() * 1000), 
@@ -77,14 +93,25 @@ const AuthPage = () => {
         // 3. Call the Register API
         await registerAPICall(registerObj);
         
-        alert("Registration Successful! Please Login.");
+        //Replace alert with success toast notification
+        toast.success("Registration Successful! You can now login.", {
+          position: "top-center",
+          autoClose: 3000,
+          theme: "dark",
+        });
         
-        // 4. Switch to Login View
+        // 4. Switch to Login View and clear password fields
         setIsLogin(true);
+        setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
 
       } catch (error) {
         console.error(error);
-        alert("Registration Failed! Username or Email might already exist.");
+        //Replace alert with error toast notification
+        toast.error("Registration Failed! Email might already be in use.", {
+          position: "top-center",
+          autoClose: 4000,
+          theme: "dark",
+        });
       }
     }
   };
@@ -107,7 +134,6 @@ const AuthPage = () => {
     <div className="auth-container">
       
       <div className="auth-form-section">
-
 
         <div className="form-wrapper">
           
@@ -192,7 +218,6 @@ const AuthPage = () => {
           </form>
         </div>
         
-
         <div className="brand-container">
             <div className="brand-icon">
                 <img 

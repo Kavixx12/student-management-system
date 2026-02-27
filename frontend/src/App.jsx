@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ListStudentComponent from './components/ListStudentComponent'
 import StudentComponent from './components/StudentComponent'
 import AuthPage from './components/AuthPage'
@@ -9,6 +11,11 @@ import Layout from './components/Layout'
 function App() {
     return (
         <BrowserRouter>
+            <ToastContainer 
+                position="top-right" 
+                autoClose={3000} 
+                theme="dark" 
+            />
             <Routes>
                 {/* Default Route: Redirect users to the login page initially */}
                 <Route path='/' element={<Navigate to="/login" />} />

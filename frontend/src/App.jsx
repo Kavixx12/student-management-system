@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
+import AccountSettings from './components/AccountSettings';
 import 'react-toastify/dist/ReactToastify.css';
 import ListStudentComponent from './components/ListStudentComponent'
 import StudentComponent from './components/StudentComponent'
@@ -37,6 +38,8 @@ function App() {
                     <Route path='/students' element={<ListStudentComponent />} />
                     <Route path='/add-student' element={<StudentComponent />} />
                     <Route path='/edit-student/:id' element={<StudentComponent />} />
+
+                    <Route path='/account-settings' element={<AccountSettings />} />
                 </Route>
                 
             </Routes>

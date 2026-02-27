@@ -1,0 +1,26 @@
+/* Override default success variables */
+:root {
+  --toastify-color-success: #FF8C00 !important;
+  --toastify-icon-color-success: #FF8C00 !important;
+  --toastify-color-dark: #111111 !important;
+}
+
+/* Theme the dark toast box */
+.Toastify__toast-theme--dark {
+  background: #111111 !important;
+  border: 1px solid #1e1e1e !important;
+  color: white !important;
+  border-left: 4px solid #FF8C00 !important;
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Force the progress bar to be Orange */
+.Toastify__toast--success .Toastify__progress-bar {
+  background: #FF8C00 !important;
+}
+
+/* Force the SVG Icon to be Orange */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #FF8C00 !important;
+}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import './Dashboard.css'; 
+import './Dashboard.css';
 
 const O = "#FF8C00";
 
@@ -22,142 +22,140 @@ const IcoDownArrow = () => (<svg width="14" height="14" fill="none" stroke="curr
 
 // ── Sidebar ──
 const NAV = [
-  { Icon: IcoDashboard, label: "Dashboard", path: "/dashboard" },
-  { Icon: IcoEnquiry,   label: "Enquiry", path: "#" },
-  { Icon: IcoAttendance,label: "Attendance", path: "#" },
-  { Icon: IcoStudents,  label: "Students", path: "/students" },
-  { Icon: IcoBatch,     label: "Batch", path: "#" },
-  { Icon: IcoUsers,     label: "Users", path: "#" },
-  { Icon: IcoSettings,  label: "Settings", path: "#" },
+    { Icon: IcoDashboard, label: "Dashboard", path: "/dashboard" },
+    { Icon: IcoAttendance,label: "Attendance", path: "#" },
+    { Icon: IcoStudents,  label: "Students", path: "/students" },
+    { Icon: IcoUsers,     label: "Users", path: "#" },
+
 ];
 
 function Sidebar() {
-  const navigate = useNavigate();
-  const currentPath = window.location.pathname;
-  const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
+    const currentPath = window.location.pathname;
+    const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <aside className="sidebar">
-      <div className="sidebar-brand" style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: '50px', marginBottom: '20px' }}>
-        <img 
-          src={isHovered ? "/logoorange.png" : "/logo.png"} 
-          alt="Logo" 
-          onClick={() => navigate('/dashboard')}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          style={{ width: '100px', height: '100px', objectFit: 'contain', cursor: 'pointer', transition: 'opacity 0.3s ease-in-out' }} 
-        />
-      </div>
+    return (
+        <aside className="sidebar">
+            <div className="sidebar-brand" style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: '50px', marginBottom: '20px' }}>
+                <img
+                    src={isHovered ? "/logoorange.png" : "/logo.png"}
+                    alt="Logo"
+                    onClick={() => navigate('/dashboard')}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    style={{ width: '100px', height: '100px', objectFit: 'contain', cursor: 'pointer', transition: 'opacity 0.3s ease-in-out' }}
+                />
+            </div>
 
-      <nav className="sidebar-nav">
-        {NAV.map(({Icon, label, path}) => {
-          const isActive = currentPath === path;
-          return (
-            <button key={label} onClick={() => navigate(path)} className={`nav-item ${isActive ? 'active' : ''}`}>
-              <Icon />{label}
-            </button>
-          )
-        })}
-      </nav>
-    </aside>
-  );
+            <nav className="sidebar-nav">
+                {NAV.map(({Icon, label, path}) => {
+                    const isActive = currentPath === path;
+                    return (
+                        <button key={label} onClick={() => navigate(path)} className={`nav-item ${isActive ? 'active' : ''}`}>
+                            <Icon />{label}
+                        </button>
+                    )
+                })}
+            </nav>
+        </aside>
+    );
 }
 
 // ── Top Bar ──
-// 🔥 Accept profileImage as a prop
+// Accept profileImage as a prop
 function TopBar({ profileImage }) {
-  const navigate = useNavigate();
-  
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token"); 
-    navigate("/login");               
-  };
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
-  return (
-    <div className="topbar" style={{ justifyContent: 'flex-end' }}>
-      <div className="topbar-right">
-        <button className="notification-btn"><IcoBell /></button>
-        
-        <div className="user-profile-container" ref={dropdownRef}>
-          <div className="user-profile" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            
-            <div className="user-avatar">
-              {/* 🔥 Show image if uploaded, otherwise show K */}
-              {profileImage ? <img src={profileImage} alt="Profile" /> : "K"}
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
+    return (
+        <div className="topbar" style={{ justifyContent: 'flex-end' }}>
+            <div className="topbar-right">
+                <button className="notification-btn"><IcoBell /></button>
+
+                <div className="user-profile-container" ref={dropdownRef}>
+                    <div className="user-profile" onClick={() => setDropdownOpen(!dropdownOpen)}>
+
+                        <div className="user-avatar">
+                            {/* Show image if uploaded, otherwise show K */}
+                            {profileImage ? <img src={profileImage} alt="Profile" /> : "K"}
+                        </div>
+
+                        {/* Removed the "Hi Kaveesha" span to make it minimal */}
+                        <span style={{color: "#888", display: 'flex', marginLeft: '6px'}}><IcoDownArrow /></span>
+                    </div>
+
+                    {dropdownOpen && (
+                        <div className="profile-dropdown">
+                            <div className="dropdown-header">
+                                <strong style={{color: 'white', fontSize: '14px', display: 'block'}}>Kaveesha Pathumina</strong>
+                                <span style={{color: '#777', fontSize: '12px'}}>kaveesha@eduspark.com</span>
+                            </div>
+                            <div className="dropdown-divider"></div>
+
+                            <button className="dropdown-item" onClick={() => { navigate("/dashboard"); setDropdownOpen(false); }}>
+                                <IcoUser /> Profile
+                            </button>
+                            <button className="dropdown-item" onClick={() => { navigate("/account-settings"); setDropdownOpen(false); }}>
+                                <IcoSettingsMenu /> Account settings
+                            </button>
+
+                            <div className="dropdown-divider"></div>
+                            <button className="dropdown-item logout" onClick={handleLogout}>
+                                <IcoLogout /> Sign out
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
-            
-            {/* 🔥 Removed the "Hi Kaveesha" span to make it minimal */}
-            <span style={{color: "#888", display: 'flex', marginLeft: '6px'}}><IcoDownArrow /></span>
-          </div>
-
-          {dropdownOpen && (
-            <div className="profile-dropdown">
-              <div className="dropdown-header">
-                <strong style={{color: 'white', fontSize: '14px', display: 'block'}}>Kaveesha Pathumina</strong>
-                <span style={{color: '#777', fontSize: '12px'}}>kaveesha@eduspark.com</span>
-              </div>
-              <div className="dropdown-divider"></div>
-              
-              <button className="dropdown-item" onClick={() => { navigate("/dashboard"); setDropdownOpen(false); }}>
-                <IcoUser /> Profile
-              </button>
-              <button className="dropdown-item" onClick={() => { navigate("/account-settings"); setDropdownOpen(false); }}>
-                <IcoSettingsMenu /> Account settings
-              </button>
-              
-              <div className="dropdown-divider"></div>
-              <button className="dropdown-item logout" onClick={handleLogout}>
-                <IcoLogout /> Sign out
-              </button>
-            </div>
-          )}
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 // ── Main Layout Component ──
 export default function Layout() {
-  // 🔥 Global state for the profile image, persisted with localStorage
-  const [profileImage, setProfileImage] = useState(localStorage.getItem('profileImage') || null);
+    // Global state for the profile image, persisted with localStorage
+    const [profileImage, setProfileImage] = useState(localStorage.getItem('profileImage') || null);
 
-  const updateProfileImage = (url) => {
-    setProfileImage(url);
-    if (url) {
-      localStorage.setItem('profileImage', url);
-    } else {
-      localStorage.removeItem('profileImage');
-    }
-  };
+    const updateProfileImage = (url) => {
+        setProfileImage(url);
+        if (url) {
+            localStorage.setItem('profileImage', url);
+        } else {
+            localStorage.removeItem('profileImage');
+        }
+    };
 
-  return (
-    <div className="dashboard-container">
-      <Sidebar />
-      <div className="dashboard-main-area">
-        
-        {/* Pass the image down to TopBar */}
-        <TopBar profileImage={profileImage} />
+    return (
+        <div className="dashboard-container">
+            <Sidebar />
+            <div className="dashboard-main-area">
 
-        <div style={{ flex: 1, overflowY: "auto" }}>
-          {/* 🔥 Pass context down to Outlet so AccountSettings can use it */}
-          <Outlet context={{ profileImage, setProfileImage: updateProfileImage }} /> 
+                {/* Pass the image down to TopBar */}
+                <TopBar profileImage={profileImage} />
+
+                <div style={{ flex: 1, overflowY: "auto" }}>
+                    {/* Pass context down to Outlet so AccountSettings can use it */}
+                    <Outlet context={{ profileImage, setProfileImage: updateProfileImage }} />
+                </div>
+
+            </div>
         </div>
-        
-      </div>
-    </div>
-  );
+    );
 }

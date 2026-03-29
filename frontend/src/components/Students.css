@@ -1,0 +1,214 @@
+
+.students-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.add-student-btn {
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+    font-family: inherit;
+}
+
+.add-student-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 140, 0, 0.4);
+}
+
+/* ── Students Table ── */
+.students-table-container {
+    background: #111111;
+    border: 1px solid #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: white;
+}
+
+.students-table th {
+    background: #1a1a1a;
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.students-table td {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #1e1e1e;
+    color: #ccc;
+}
+
+.students-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Overlay (Background Dimmer) ── */
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.drawer-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ── Side Drawer ── */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 400px;
+    height: 100vh;
+    background: #111111;
+    border-left: 1px solid #1e1e1e;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.8);
+    z-index: 2001;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-drawer.open {
+    right: 0;
+}
+
+/* Drawer Header */
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 30px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.drawer-title {
+    font-family: 'EduSparkFont', sans-serif;
+    font-size: 22px;
+    color: white;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.close-drawer-btn {
+    background: transparent;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.close-drawer-btn:hover {
+    color: #ff4d4d;
+}
+
+/* Drawer Body (Form) */
+.drawer-body {
+    padding: 30px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.drawer-form-group {
+    margin-bottom: 20px;
+}
+
+.drawer-form-label {
+    display: block;
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.drawer-form-input, .drawer-form-select {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: white;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+}
+
+.drawer-form-input:focus, .drawer-form-select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
+.drawer-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #1e1e1e;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 1px solid #444;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #222;
+}
+
+.btn-save {
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+}

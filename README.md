@@ -16,7 +16,7 @@ Edu Spark is a comprehensive Student Management System designed to streamline ad
 ## 🛠️ Tech Stack
 
 *(Update these with the actual technologies you used)*
-* **Frontend:** React.js / HTML5 / CSS3 / Tailwind CSS (or your preferred UI library)
+* **Frontend:** React.js / HTML5 / CSS3 
 * **Backend:** Spring Boot / Node.js 
 * **Database:** MySQL 
 
